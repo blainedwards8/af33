@@ -1,14 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    Links
+<%- include("partials/header") %>
+<hr />
+<h5>Classes</h5>
+<ul class="list-group">
     <% links.forEach(function(link) {%>
-        <li><%=link %></li>
+        <li class="list-group-item">
+            <a href="/<%=link.link %>"><%=link.name || link.link %></a>
+            <br />
+            <%=link.description %>
+        </li>
     <% }) %>
-</body>
-</html>
+</ul>
+<%- include("partials/footer") %>

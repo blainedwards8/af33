@@ -1,0 +1,24 @@
+
+<%- include("partials/header") %>            
+<h3>Add Class</h3>
+<hr />
+<form method="post" action="/link">
+    <p>
+        <input placeholder="Name" class="form-control" type="text" name="name" />
+    </p>
+
+    <p>
+        <input placeholder="Link" class="form-control" type="text" name="link" />
+    </p>
+
+    <p>
+        <input placeholder="URL" class="form-control" type="text" name="url" />
+    </p>
+
+    <p>
+        <textarea placeholder="Description" class="form-control" name="description"></textarea>
+    </p>
+
+    <p><button type="submit" class="btn btn-primary">Add</button></p>
+</form>
+<%- include("partials/footer") %> 

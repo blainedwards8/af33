@@ -1,0 +1,19 @@
+<%- include("partials/header") %>
+    <h5>Classes</h5>
+    <ul class="list-group">
+        <% links.forEach(function(link) {%>
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-md-10"><%=link.name || link.link %></div>
+                    <div class="col-md-1"><a class="btn btn-primary" href="/edit/<%= link._id %>">Edit</a></div>
+                    <div class="col-md-1"><a href="#" class="btn btn-danger">Delete</a></div>
+                </div>
+            </li>
+        <% }) %>
+    </ul>
+
+    <hr />
+    <div class="container">
+        <a class="btn btn-primary" href="./add">Create New Class</a>
+    </div>
+<%- include("partials/footer") %>

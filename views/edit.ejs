@@ -1,0 +1,24 @@
+
+<%- include("partials/header") %>            
+<h3>Edit Class</h3>
+<hr />
+<form method="post" action="/update/<%= link._id %>">
+    <p>
+        <input placeholder="Name" class="form-control" type="text" name="name" value="<%=link.name %>" />
+    </p>
+
+    <p>
+        <input placeholder="Link" class="form-control" type="text" name="link" value="<%= link.link %>"/>
+    </p>
+
+    <p>
+        <input placeholder="URL" class="form-control" type="text" name="url" value="<%= link.url %>"/>
+    </p>
+
+    <p>
+        <textarea placeholder="Description" class="form-control" name="description"><%= link.description %></textarea>
+    </p>
+
+    <p><button type="submit" class="btn btn-primary">Update</button></p>
+</form>
+<%- include("partials/footer") %> 
