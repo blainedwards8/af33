@@ -4,6 +4,7 @@ const path = require('path');
 
 var app = express();
 var linksdb = new Datastore({filename: "./dbs/links.db", autoload: true});
+var usedb = new Datastore({filename: "./dbs/use.db", autoload: true});
 
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
@@ -42,21 +43,35 @@ app.get('/add', async (req,res) => {
     res.render("add.ejs");
 });
 
+
+//ToDo Implement this
+app.delete('/links/:_id', async (req,res) => {
+    let {_id} = req.params;
+    linksdb.remove({_id}).then(() => {
+        res.redirect('/admin');
+    }).catch(e => {
+        res.status(500).send("There was an error!");
+    });
+});
+
 app.post('/link', async (req,res) => {
     let {name, url, description, link} = req.body;
-    let results = await linksdb.insert({name, url, link, description, created: new Date()});
-    res.send("OK");
+    linksdb.insert({name, url, link, description, created: new Date()}).then(() => {
+        res.redirect('/admin');
+    }).catch(e => {
+        res.status(500).send("There was an error!");
+    });
 });
 
 app.get('/:link', async (req,res) => {
     let {link} = req.params;
     let record = await linksdb.findOne({link});
-    if(!!record && !!record.url) res.redirect(301,record.url);
+    if(!!record && !!record.url) {
+        usedb.insert({link, date: new Date()});
+        res.redirect(301,record.url);
+    }
     else res.sendStatus(404);
 });
-
-
-
 
 app.listen(3000, () => {
     console.log("Listening on port 3000");
